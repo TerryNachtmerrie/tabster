@@ -1,2 +1,2 @@
 # tabster
-Another commit!
+VS Code integration should work now!
