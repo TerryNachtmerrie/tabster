@@ -1,3 +1,4 @@
+app/config/
 cache/*
 composer.json
 composer.lock
