@@ -1,5 +1,3 @@
-app/config/
-cache/*
 composer.lock
 git_to_tabster
 vendor/

@@ -12,6 +12,7 @@ use \AltoRouter as Router;
 class Application {
 
     private $auth;
+    private $acl;
     private $config;
     private $cookie;
     private $database;
@@ -27,6 +28,7 @@ class Application {
         $this->router = new Router($this->config->routes->getConfig());
         $this->auth = new Auth($this->database, $this->session, $this->cookie);
         $this->user = $this->auth->getCurrentUser();
+        $this->acl = new Acl($this->database);
 
         $this->session->auth = [
             'id' => $this->user->id,
