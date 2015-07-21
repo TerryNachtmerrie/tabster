@@ -1,6 +1,7 @@
 <?php
 namespace Tabster\Application;
 
+use Tabster\Application\Acl\Acl;
 use Tabster\Application\Auth\Auth;
 use Tabster\Application\Config\ConfigCollection;
 use Tabster\Application\Cookie\Cookie;
