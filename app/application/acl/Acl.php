@@ -6,7 +6,7 @@ use Tabster\Application\Database;
 class Acl {
 	private $db;
 	
-	private function __construct(Database $database)
+	public function __construct(Database $database)
 	{
 		$this->db  = $database;
 	}
