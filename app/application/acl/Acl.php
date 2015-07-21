@@ -1,7 +1,7 @@
 <?php
 namespace Tabster\Application\Acl;
 
-use Tabster\Application\Database;
+use Tabster\Application\Database\Database;
 
 class Acl {
 	private $db;
