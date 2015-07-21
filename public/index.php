@@ -29,5 +29,5 @@ require APP_PATH . '/vendor/autoload.php';
 $config = new ConfigCollection();
 $config->addConfig(new Config(APP_PATH . '/app/config/database.php', Config::CONFIG_ARRAY));
 $config->addConfig(new Config(APP_PATH . '/app/config/cookie.php', Config::CONFIG_ARRAY));
-
+$config->addCOnfig(new Config(APP_PATH . '/app/config/routes.php', Config::CONFIG_ARRAY));
 $application = new Application($config);

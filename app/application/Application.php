@@ -24,11 +24,7 @@ class Application {
         $this->database = new Database($this->config->database);
         $this->session = new Session('TabsterSession');
         $this->cookie = new Cookie($this->config->cookie);
-        $this->router = new Router(array(
-            array('GET', '/users', 'UsersController#Index', 'users'),
-            array('GET', '/', 'IndexController#Index', 'home'),
-              /* array('DELETE','/users/[i:id]', 'users#delete', 'delete_user') */
-        ));
+        $this->router = new Router($this->config->routes->getConfig());
         $this->auth = new Auth($this->database, $this->session, $this->cookie);
         $this->user = $this->auth->getCurrentUser();
 
@@ -39,8 +35,7 @@ class Application {
             'active' => $this->user->active,
             'role' => $this->user->role
         ];
-
-        var_dump($this->user);
-        var_dump($this->session->auth);
     }
+    
+     
 }
