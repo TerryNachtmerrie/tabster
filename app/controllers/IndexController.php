@@ -7,6 +7,6 @@ class IndexController extends ControllerBase
 {
 	public function index()
 	{
-		
+		$this->view->render();
 	}
 }

@@ -3,7 +3,7 @@
 return [
     'name' => 'routes',
     'config' => [
-        ['GET', '/', 'Tabster\\Controllers\\IndexController#Index', 'index_index'],
-        ['GET', '/users', 'userController#Index', 'user_index'],
+        ['GET', '/', 'index#index', 'index_index'],
+        ['GET', '/users', 'users#index', 'user_index'],
     ]
 ];

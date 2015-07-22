@@ -51,13 +51,19 @@ class Application {
         }
         
         list($class, $method) = explode('#', $match['target']);
-
-        if(class_exists($class)) {
-            if(method_exists($class, $method)) {
-                $controller = new $class($this->config, $this->database, $this->session, $this->router, $this->user, $this->view);
+        
+        $class = ucFirst($class) . 'Controller';
+        
+        $namespace = 'Tabster\\Controllers\\';
+                
+        if(class_exists($namespace . $class)) {
+            if(method_exists($namespace . $class, $method)) {
+                $this->view = new View($this->config->view, $match);
+                $callable = $namespace . $class;
+                $controller = new $callable($this->config, $this->database, $this->session, $this->router, $this->user, $this->view, $match);
                 $controller->$method();
             } else {
-                throw new \Exception(sptringf('Action %s does not exist.', $method));
+                throw new \Exception(sprintf('Action %s does not exist.', $method));
             }
         } else {
             throw new \Exception(sprintf('Controller %s does not exist.', $class));

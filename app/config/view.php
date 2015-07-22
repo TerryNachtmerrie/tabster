@@ -9,5 +9,8 @@ return [
             'cache' => false,
             'strict_variables' => true,
         ],
+        'defaultVariables' => [
+            'head_title' => 'Tabster' 
+        ],
     ],
 ];

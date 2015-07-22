@@ -14,14 +14,15 @@ use \AltoRouter as Router;
 
 class ControllerBase
 {
-	private $config;
-	private $database;
-	private $session;
-	private $router;
-	private $user;
-	private $view;
+	public $config;
+	public $database;
+	public $session;
+	public $router;
+	public $user;
+	public $view;
+	public $match;
 	
-	public function __construct(ConfigCollection $config, Database $database, Session $session, Router $router, Users $user, View $view)
+	public function __construct(ConfigCollection $config, Database $database, Session $session, Router $router, Users $user, View $view, $match = '')
 	{
 		$this->config = $config;
 		$this->database = $database;
@@ -29,6 +30,7 @@ class ControllerBase
 		$this->router = $router;
 		$this->user = $user;
 		$this->view = $view;
+		$this->view->setTemplate(str_replace('#', '/', $match['target']));
 	}
 }
 	
