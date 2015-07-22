@@ -10,4 +10,9 @@ class Acl {
 	{
 		$this->db  = $database;
 	}
+	
+	public function checkPermissions(User $user, $permission)
+	{
+		
+	}
 }

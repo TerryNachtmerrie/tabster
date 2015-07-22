@@ -1,2 +1,6 @@
-git_to_tabster
 .gitignore
+cache/*
+!cache/index.html
+composer.lock
+git_to_tabster
+vendor

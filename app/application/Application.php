@@ -40,5 +40,11 @@ class Application {
         ];
     }
     
+    public function run()
+    {
+        $match = $router->match();
+        var_dump($match);
+    }
+    
      
 }
