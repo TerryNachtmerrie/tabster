@@ -1,6 +1,7 @@
 .gitignore
 cache/*
 !cache/index.html
+!cache/views/index.html
 composer.lock
 git_to_tabster
 vendor

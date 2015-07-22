@@ -2,6 +2,7 @@
     "require": {
         "altorouter/altorouter": "^1.1",
         "lichtner/fluentpdo": "^1.0",
-        "defuse/php-encryption": "^1.2"
+        "defuse/php-encryption": "^1.2",
+        "twig/twig": "^1.18"
     }
 }

@@ -7,6 +7,8 @@ use Tabster\Application\Config\ConfigCollection;
 use Tabster\Application\Cookie\Cookie;
 use Tabster\Application\Database\Database;
 use Tabster\Application\Session\Session;
+use Tabster\Application\View\View;
+use Tabster\Controllers;
 use Tabster\Models\Users;
 use \AltoRouter as Router;
 
@@ -30,6 +32,7 @@ class Application {
         $this->auth = new Auth($this->database, $this->session, $this->cookie);
         $this->user = $this->auth->getCurrentUser();
         $this->acl = new Acl($this->database);
+        $this->view = new View($this->config->view);
 
         $this->session->auth = [
             'id' => $this->user->id,
@@ -42,8 +45,24 @@ class Application {
     
     public function run()
     {
-        $match = $router->match();
-        var_dump($match);
+        $match = $this->router->match();
+        if($match === false) {
+            throw new \Exception('No route found');
+        }
+        
+        list($class, $method) = explode('#', $match['target']);
+
+        if(class_exists($class)) {
+            if(method_exists($class, $method)) {
+                $controller = new $class($this->config, $this->database, $this->session, $this->router, $this->user, $this->view);
+                $controller->$method();
+            } else {
+                throw new \Exception(sptringf('Action %s does not exist.', $method));
+            }
+        } else {
+            throw new \Exception(sprintf('Controller %s does not exist.', $class));
+        }     
+        
     }
     
      
