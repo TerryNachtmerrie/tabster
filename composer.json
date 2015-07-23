@@ -3,6 +3,8 @@
         "altorouter/altorouter": "^1.1",
         "lichtner/fluentpdo": "^1.0",
         "defuse/php-encryption": "^1.2",
-        "twig/twig": "^1.18"
+        "twig/twig": "^1.18",
+        "twbs/bootstrap": "^3.3",
+        "components/jquery": "^2.1"
     }
 }

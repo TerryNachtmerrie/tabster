@@ -2,6 +2,8 @@
 namespace Tabster\Application\View;
 
 use Tabster\Application\Config\Config;
+use Tabster\Library\TwigHelper;
+use \Altorouter as Router;
 
 class View {
 	private $config;
@@ -13,15 +15,43 @@ class View {
 	private $twigEnvironment;
 	private $twigTemplate;
 	
-    public function __construct(Config $config)
+    public function __construct(Config $config, Router $router)
 	{
 		$this->config = $config;
+		$this->router = $router;
+		
 		$this->templateVariables = [];
 		$this->defaultVariables = $config->defaultVariables; // from $this->config, maybe
+		$this->defaultVariables['router'] = $this->router;
 		
 		$this->twigLoader = new \Twig_Loader_Filesystem($this->config->templatePath);
 		$this->twigEnvironment = new \Twig_Environment($this->twigLoader, $this->config->environmentOptions);
-		$this->renderedTemplate;
+		
+		$twig_css = new \Twig_SimpleFunction('css', function($link, $options = []){
+			$attributes = '';
+			foreach($options as $name => $value) {
+				if(is_int($name)) {
+					$attributes .= ' ' . $value . ' ';
+				} else {
+					$attributes .= ' ' . $name . '="' . $value . '" ';
+				}
+			}
+			return sprintf('<link rel="stylesheet" type="text/css" href="%s" %s>', $link, $attributes);
+		});
+		$this->twigEnvironment->addFunction($twig_css);
+		
+		$twig_js = new \Twig_SimpleFunction('js', function($link, $options = []){
+			$attributes = '';
+			foreach($options as $name => $value) {
+				if(is_int($name)) {
+					$attributes .= ' ' . $value . ' ';
+				} else {
+					$attributes .= ' ' . $name . '="' . $value . '" ';
+				}
+			}
+			return sprintf('<script src="%s" %s></script>', $link, $attributes);
+		});
+		$this->twigEnvironment->addFunction($twig_js);
 	}
 	
 	public function __set($index, $value)
@@ -60,8 +90,4 @@ class View {
 		}
 	}
 	
-	public function display()
-	{
-		echo $this->renderedTemplate;
-	}
 }

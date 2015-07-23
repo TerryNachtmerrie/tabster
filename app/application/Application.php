@@ -32,7 +32,6 @@ class Application {
         $this->auth = new Auth($this->database, $this->session, $this->cookie);
         $this->user = $this->auth->getCurrentUser();
         $this->acl = new Acl($this->database);
-        $this->view = new View($this->config->view);
 
         $this->session->auth = [
             'id' => $this->user->id,
@@ -58,7 +57,7 @@ class Application {
                 
         if(class_exists($namespace . $class)) {
             if(method_exists($namespace . $class, $method)) {
-                $this->view = new View($this->config->view, $match);
+                $this->view = new View($this->config->view, $this->router);
                 $callable = $namespace . $class;
                 $controller = new $callable($this->config, $this->database, $this->session, $this->router, $this->user, $this->view, $match);
                 $controller->$method();
